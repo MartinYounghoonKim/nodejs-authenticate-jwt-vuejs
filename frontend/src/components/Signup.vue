@@ -12,15 +12,19 @@
       >
         <b-form-input type="password"></b-form-input>
       </b-form-group>
-      <b-button size="lg" variant="success">Signin</b-button>
+      <b-form-group
+        label="Enter your password again"
+      >
+        <b-form-input type="password"></b-form-input>
+      </b-form-group>
+      <b-button size="lg" variant="success">Signup</b-button>
     </form>
-    <router-link :to="{ name:'Signup' }">Sigiup</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Signin',
+  name: 'Signup',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
