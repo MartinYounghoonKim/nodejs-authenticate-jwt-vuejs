@@ -1,4 +1,7 @@
-exports.tester = (req, res, next) => {
-    let inquerySql = 'SELECT * FROM board123';
-    res.send(inquerySql)
+const authModels = require('../../models/auth/index');
+
+exports.getUsers = (req, res, next) => {
+    authModels.getUsers(function(error, results) {
+        res.json(results);
+    });
 }
