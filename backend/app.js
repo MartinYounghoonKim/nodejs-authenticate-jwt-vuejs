@@ -21,12 +21,6 @@ app.use(cookieParser());
 const ApiRouters = require('./routes/index');
 app.use('/', ApiRouters);
 
-/**
- * @desc database connection
- */
-const database = require('./database/index');
-database.connect();
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
