@@ -1,19 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const auth = express.Router();
+const controller = require('./controller');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    let inquerySql = 'SELECT * FROM board';
-    console.log(inquerySql);
-    // connection.query(inquerySql, (err,result, fields)=>{
-    //     if(err) {
-    //         console.log(err);
-    //         res.status(500).send("Error");
-    //     } else {
-    //         res.send(result);
-    //     }
-    // })
-    res.send('success123')
-});
+auth.get('/', controller.tester);
 
-module.exports = router;
+module.exports = auth;
