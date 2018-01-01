@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const authRouter = require('./auth/index');
+const boardRouter = require('./board/index');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('success')
-});
-
-module.exports = router;
+module.exports = (app) => {
+    app.use('/', authRouter);
+    app.use('/board', boardRouter);
+}
