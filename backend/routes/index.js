@@ -1,7 +1,10 @@
-const authRouter = require('./auth/index');
-const boardRouter = require('./board/index');
+const express = require('express');
+const router = express.Router();
 
-module.exports = (app) => {
-    app.use('/', authRouter);
-    app.use('/board', boardRouter);
-}
+const auth = require('./auth/index');
+const board = require('./board/index');
+
+router.use('/', auth);
+router.use('/board', board);
+
+module.exports = router;
