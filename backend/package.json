@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve:dev": "forever start -c nodemon -l ./logs/forever.log -o ./logs/out.log -e ./logs/err.log -a ./bin/www",
+    "serve:dev": "nodemon ./bin/www",
     "start": "NODE_ENV=development node ./bin/www"
   },
   "dependencies": {
