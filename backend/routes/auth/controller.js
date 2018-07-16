@@ -6,6 +6,6 @@ exports.getUsers = (req, res, next) => {
     }
 )};
 
-export.setUsers = (req, res, next) => {
+exports.setUsers = (req, res, next) => {
     console.log(req);
 };
