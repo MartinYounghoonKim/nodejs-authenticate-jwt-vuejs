@@ -8,5 +8,6 @@ const controller = require('./controller');
 
 auth.get('/', controller.getUsers);
 auth.post('/', controller.signin);
+auth.post('/signup', controller.signup);
 
 module.exports = auth;
