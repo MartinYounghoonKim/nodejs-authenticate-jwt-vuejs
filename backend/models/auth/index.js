@@ -95,3 +95,24 @@ exports.signup = (information) => {
         });
     })
 };
+
+exports.signout = (id) => {
+    const sql = 'DELETE FROM users WHERE `index`=?';
+    return new Promise((resolve, reject) => {
+        connection.query(sql, id, (err, result, fields) => {
+            if (err) {
+                reject({
+                    data: {},
+                    message: 'Something wrong in server',
+                    status: 501,
+                });
+            } else {
+                resolve({
+                    status: 200,
+                    message: 'Success',
+                    data: {}
+                });
+            }
+        })
+    });
+};

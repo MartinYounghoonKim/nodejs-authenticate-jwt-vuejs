@@ -40,3 +40,17 @@ exports.signup = (req, res, next) => {
                 .json(err);
         });
 };
+
+exports.signout = (req, res, next) => {
+    const { id } = req.body;
+
+    authModels.signout(id)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};
