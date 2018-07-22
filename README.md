@@ -20,15 +20,14 @@
 ### Features
 * ---------- **Essentials** ----------
 * [x] Seperate frontend and backend server
-
 * ---------- **Backend server** ----------
 * [x] Signin
 * [x] Signup
 * [x] Signout
 * [ ] JWT authenticate
-
 * ---------- **Frontend server** ----------
-* [ ] Authenticate handling
+* [ ] handling jwt token with vuex
+* [ ] handling Authenticate 
 
 ## Getting started
 
