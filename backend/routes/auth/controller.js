@@ -29,6 +29,15 @@ exports.signin = (req, res, next) => {
 };
 exports.signup = (req, res, next) => {
     const { uid, password, role, position } = req.body;
+    const isInvalidRequest = !uid || !password || !role || !position;
+
+    if (isInvalidRequest) {
+        res.status(401)
+            .json({
+                data: {},
+                message: 'This is not a valid request.'
+            });
+    }
 
     authModels.signup({ uid, password, role, position })
         .then(result => {
