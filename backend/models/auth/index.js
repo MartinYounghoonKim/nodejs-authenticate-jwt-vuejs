@@ -2,6 +2,7 @@
  * @desc auth model
  */
 const database = require('../index');
+const bcrypt = require('bcrypt');
 const connection = database.connection();
 
 const authModel = {
@@ -30,7 +31,7 @@ exports.signin = (information) => {
                     message: 'User information isn`t exist.'
                 });
             } else {
-                if (result[0].password === password) {
+                if (bcrypt.compareSync(password, result[0].password)) {
                     resolve({
                         status: 200,
                         data: {},
@@ -74,8 +75,9 @@ exports.signup = (information) => {
             }
         });
     }).then(() => {
+        const encryptedPassword = bcrypt.hashSync(password, 10);
         return new Promise((resolve, reject) => {
-            connection.query(insertSql, [uid, password, role, position], (err, result, fields) => {
+            connection.query(insertSql, [uid, encryptedPassword, role, position], (err, result, fields) => {
                 if (err) {
                     reject({
                         data: {},
@@ -90,6 +92,6 @@ exports.signup = (information) => {
                     });
                 }
             });
-        })
+        });
     })
 };
