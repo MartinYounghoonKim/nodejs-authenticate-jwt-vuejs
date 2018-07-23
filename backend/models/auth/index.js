@@ -2,14 +2,8 @@
  * @desc auth model
  */
 const database = require('../index');
-const bcrypt = require('bcrypt');
 const connection = database.connection();
-
-const authModel = {
-    getUsers: function(callback) {
-        return connection.query('select * from users', callback);
-    }
-};
+const authenticateUtils = require('../../utils/authenticate');
 
 exports.signin = (information) => {
     const { uid, password } = information;
@@ -31,10 +25,15 @@ exports.signin = (information) => {
                     message: 'User information isn`t exist.'
                 });
             } else {
-                if (bcrypt.compareSync(password, result[0].password)) {
+                const isMatchPassword = authenticateUtils.certifyPassword(password, result[0].password);
+                const accessToken = authenticateUtils.generateJWTToken({ uid, password });
+                console.log(result[0]);
+                if (isMatchPassword) {
                     resolve({
                         status: 200,
-                        data: {},
+                        data: {
+                            accessToken,
+                        },
                         message: 'User information matched.'
                     });
                 } else {
@@ -75,7 +74,7 @@ exports.signup = (information) => {
             }
         });
     }).then(() => {
-        const encryptedPassword = bcrypt.hashSync(password, 10);
+        const encryptedPassword = authenticateUtils.encryptPassword(password);
         return new Promise((resolve, reject) => {
             connection.query(insertSql, [uid, encryptedPassword, role, position], (err, result, fields) => {
                 if (err) {
