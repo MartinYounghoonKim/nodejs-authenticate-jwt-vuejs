@@ -7,6 +7,7 @@ const auth = express.Router();
 const controller = require('./controller');
 
 auth.get('/', controller.getUsers);
+auth.get('/me', controller.certifyUser);
 auth.post('/signin', controller.signin);
 auth.post('/signup', controller.signup);
 auth.delete('/signout', controller.signout);

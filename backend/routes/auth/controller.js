@@ -63,3 +63,16 @@ exports.signout = (req, res, next) => {
                 .json(err);
         });
 };
+
+exports.certifyUser = (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    authModels.certifyUser(token)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};

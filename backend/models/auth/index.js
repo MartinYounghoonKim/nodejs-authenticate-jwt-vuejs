@@ -26,9 +26,11 @@ exports.signin = (information) => {
                 });
             } else {
                 const isMatchPassword = authenticateUtils.certifyPassword(password, result[0].password);
-                const accessToken = authenticateUtils.generateJWTToken({ uid, password });
-                console.log(result[0]);
+
                 if (isMatchPassword) {
+                    const { role, position } = result[0];
+                    const accessToken = authenticateUtils.generateAccessToken({ uid, role, position });
+
                     resolve({
                         status: 200,
                         data: {
@@ -114,4 +116,22 @@ exports.signout = (id) => {
             }
         })
     });
+};
+
+exports.certifyUser = (token) => {
+    return authenticateUtils.certifyAccessToken(token)
+        .then(res => {
+            return Promise.resolve({
+                status: 200,
+                data: res,
+                message: 'Success',
+            });
+        })
+        .catch(err => {
+            return Promise.reject({
+                data: {},
+                message: 'This token is invalid.',
+                status: 401,
+            });
+        });
 };
