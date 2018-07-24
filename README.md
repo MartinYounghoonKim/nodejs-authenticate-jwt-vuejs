@@ -38,13 +38,21 @@ CREATE TABLE `users` (
 $ cd backend && npm install
 ```
 
-3. Make logs directory for loggin backend server
+3. Edit database.config.js 
+```bash
+$ vi backend/config/database.config.js
+
+# After that setting git command
+$ git update-index --assume-unchanged backend/config/database.config.js
+```
+
+4. Make logs directory for loggin backend server
 ```bash
 # Directory: /backend
 $ mkdir logs && cd logs && touch err.log & touch forever.log & touch out.log 
 ```
 
-4. Serve the app
+5. Serve the app
 ```bash
 $ node ./bin/www
 ```
