@@ -17,6 +17,18 @@
 - Vue@2.5.2
 - Vue Router@3.0.1
 
+### Features
+* ---------- **Essentials** ----------
+* [x] Seperate frontend and backend server
+* ---------- **Backend server** ----------
+* [x] Signin
+* [x] Signup
+* [x] Signout
+* [ ] JWT authenticate
+* ---------- **Frontend server** ----------
+* [ ] handling jwt token with vuex
+* [ ] handling Authenticate 
+
 ## Getting started
 
 ### Backend set up

@@ -3,12 +3,7 @@
  */
 const database = require('../index');
 const connection = database.connection();
-
-const authModel = {
-    getUsers: function(callback) {
-        return connection.query('select * from users', callback);
-    }
-};
+const authenticateUtils = require('../../utils/authenticate');
 
 exports.signin = (information) => {
     const { uid, password } = information;
@@ -17,16 +12,36 @@ exports.signin = (information) => {
     return new Promise((resolve, reject) => {
         connection.query(sql, [uid], (err, result, fields) => {
             if (err) {
-                reject(err);
+                reject({
+                    data: {},
+                    message: 'Something wrong in server',
+                    status: 501,
+                });
+            }
+            if (result.length === 0) {
+                reject({
+                    status: 401,
+                    data: {},
+                    message: 'User information isn`t exist.'
+                });
             } else {
-                if (result[0].password === password) {
+                const isMatchPassword = authenticateUtils.certifyPassword(password, result[0].password);
+
+                if (isMatchPassword) {
+                    const { role, position } = result[0];
+                    const accessToken = authenticateUtils.generateAccessToken({ uid, role, position });
+
                     resolve({
                         status: 200,
+                        data: {
+                            accessToken,
+                        },
                         message: 'User information matched.'
                     });
                 } else {
-                    resolve({
+                    reject({
                         status: 401,
+                        data: {},
                         message: 'User information isn`t matched.'
                     });
                 }
@@ -35,4 +50,88 @@ exports.signin = (information) => {
     });
 };
 
-// module.exports = authModel;
+exports.signup = (information) => {
+    const { uid, password, role, position } = information;
+    const selectSql = `SELECT * FROM USERS WHERE user = ?`;
+    const insertSql = `INSERT INTO users (user, password, role, position) VALUES (?, ?, ?, ?);`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(selectSql, [uid], (err, result, fields) => {
+            if (err) {
+                reject({
+                    data: {},
+                    message: 'Something wrong in server',
+                    status: 501,
+                });
+            }
+
+            if (result.length > 0) {
+                reject({
+                    status: 401,
+                    data: {},
+                    message: 'User id is already exist.'
+                });
+            } else {
+                resolve();
+            }
+        });
+    }).then(() => {
+        const encryptedPassword = authenticateUtils.encryptPassword(password);
+        return new Promise((resolve, reject) => {
+            connection.query(insertSql, [uid, encryptedPassword, role, position], (err, result, fields) => {
+                if (err) {
+                    reject({
+                        data: {},
+                        message: 'Something wrong in server',
+                        status: 501,
+                    });
+                } else {
+                    resolve({
+                        status: 200,
+                        message: 'Success',
+                        data: {}
+                    });
+                }
+            });
+        });
+    })
+};
+
+exports.signout = (id) => {
+    const sql = 'DELETE FROM users WHERE `index`=?';
+    return new Promise((resolve, reject) => {
+        connection.query(sql, id, (err, result, fields) => {
+            if (err) {
+                reject({
+                    data: {},
+                    message: 'Something wrong in server',
+                    status: 501,
+                });
+            } else {
+                resolve({
+                    status: 200,
+                    message: 'Success',
+                    data: {}
+                });
+            }
+        })
+    });
+};
+
+exports.certifyUser = (token) => {
+    return authenticateUtils.certifyAccessToken(token)
+        .then(res => {
+            return Promise.resolve({
+                status: 200,
+                data: res,
+                message: 'Success',
+            });
+        })
+        .catch(err => {
+            return Promise.reject({
+                data: {},
+                message: 'This token is invalid.',
+                status: 401,
+            });
+        });
+};

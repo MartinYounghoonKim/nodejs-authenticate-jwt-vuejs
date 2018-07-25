@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
@@ -13,6 +14,7 @@
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "forever": "^0.15.3",
+    "jsonwebtoken": "^8.3.0",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "serve-favicon": "~2.4.5"

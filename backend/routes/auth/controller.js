@@ -17,12 +17,62 @@ exports.signin = (req, res, next) => {
 
     authModels.signin({ uid, password })
         .then(result => {
-            const { status, message } = result;
+            const { status } = result;
             res.status(status)
-                .json({ message });
+                .json(result);
         })
         .catch(err => {
-            res.status(401)
-                .json({ message: err });
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};
+exports.signup = (req, res, next) => {
+    const { uid, password, role, position } = req.body;
+    const isInvalidRequest = !uid || !password || !role || !position;
+
+    if (isInvalidRequest) {
+        res.status(401)
+            .json({
+                data: {},
+                message: 'This is not a valid request.'
+            });
+    }
+
+    authModels.signup({ uid, password, role, position })
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};
+
+exports.signout = (req, res, next) => {
+    const { id } = req.body;
+
+    authModels.signout(id)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};
+
+exports.certifyUser = (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    authModels.certifyUser(token)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
         });
 };
