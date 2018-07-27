@@ -42,7 +42,7 @@ CREATE TABLE `users` (
   `position` varchar(50) NOT NULL,
   `password` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`index`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8;
 ```
 
 2. Install all backend dependencies
