@@ -1,16 +1,12 @@
 # Authentication App
 
-## Features
-
-* Node.js
-* Vue
-
 ### Node.js Stack
 
 - Mysql
 - Express server
 - Forever
 - Nodemon
+- Redis
 
 ### Vuejs Stack
 
@@ -25,6 +21,7 @@
 * [x] Signup
 * [x] Signout
 * [ ] JWT authenticate
+* [ ] Store refresh token in redis
 * ---------- **Frontend server** ----------
 * [ ] handling jwt token with vuex
 * [ ] handling Authenticate 
