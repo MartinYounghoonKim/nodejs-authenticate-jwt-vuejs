@@ -1,16 +1,12 @@
 # Authentication App
 
-## Features
-
-* Node.js
-* Vue
-
 ### Node.js Stack
 
 - Mysql
 - Express server
 - Forever
 - Nodemon
+- Redis
 
 ### Vuejs Stack
 
@@ -25,6 +21,7 @@
 * [x] Signup
 * [x] Signout
 * [ ] JWT authenticate
+* [ ] Store refresh token in redis
 * ---------- **Frontend server** ----------
 * [ ] handling jwt token with vuex
 * [ ] handling Authenticate 
@@ -62,7 +59,7 @@ CREATE TABLE `users` (
   `position` varchar(50) NOT NULL,
   `password` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`index`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8;
 ```
 
 2. Install all backend dependencies
