@@ -10,6 +10,14 @@
                 <b-form-input type="password"
                               v-model="password"></b-form-input>
             </b-form-group>
+            <b-form-group label="Enter your position">
+                <b-form-input type="text"
+                              v-model="position"></b-form-input>
+            </b-form-group>
+            <b-form-group label="Enter your role">
+                <b-form-input type="text"
+                              v-model="role"></b-form-input>
+            </b-form-group>
             <b-button size="lg"
                       variant="success"
                       type="submit">
@@ -27,20 +35,28 @@
         data () {
             return {
                 uid: '',
-                password: ''
+                password: '',
+                role: '',
+                position: ''
             };
         },
         methods: {
             signup () {
                 const uid = this.uid;
                 const password = this.password;
-                if (!uid || !password) {
+                const position = this.position;
+                const role = this.role;
+
+                if (!uid || !password || !position || !role) {
                     return false;
                 }
 
-                axios.post('http://localhost:3000/signup', { uid, password })
+                axios.post('http://localhost:3000/auth/signup', { uid, password, position, role })
                     .then(res => {
-                        console.log(res);
+                        if (res.status === 200) {
+                            // 성공적으로 회원가입이 되었을 경우
+                            this.$router.push({ name: 'Signin' });
+                        }
                     });
             }
         }
