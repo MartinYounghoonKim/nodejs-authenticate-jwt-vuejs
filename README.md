@@ -30,6 +30,26 @@
 * [ ] handling Authenticate 
 
 ## Getting started
+1. install module
+```bash
+# install frontend
+$ cd frontend
+$ npm install
+```
+
+### Frontend set up
+1. install module
+```bash
+# install frontend
+$ cd frontend
+$ npm install
+```
+2. start frontend server
+```bash
+$ npm start
+```
+
+
 
 ### Backend set up
 1. Setting database
