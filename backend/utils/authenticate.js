@@ -10,8 +10,17 @@ exports.encryptPassword = (password) => {
     return bcrypt.hashSync(password, 10)
 };
 
+exports.generateSalt = () => {
+    return bcrypt.genSaltSync(10);
+};
+
 exports.generateAccessToken = (information) => {
     return jwt.sign(information, secretKey, { expiresIn: '1m' });
+};
+
+exports.generateRefreshToken = (information) => {
+    const { uid, password } = information;
+    return jwt.sign({ uid }, secretKey + password, { expiresIn: '7d' });
 };
 
 exports.certifyAccessToken = (token) => {

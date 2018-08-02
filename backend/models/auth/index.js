@@ -4,6 +4,7 @@
 const database = require('../index');
 const connection = database.connection();
 const authenticateUtils = require('../../utils/authenticate');
+const redisUtils = require('../../utils/redis');
 
 exports.signin = (information) => {
     const { uid, password } = information;
@@ -30,11 +31,13 @@ exports.signin = (information) => {
                 if (isMatchPassword) {
                     const { role, position } = result[0];
                     const accessToken = authenticateUtils.generateAccessToken({ uid, role, position });
+                    const refreshToken = authenticateUtils.generateRefreshToken({ uid, password });
 
                     resolve({
                         status: 200,
                         data: {
                             accessToken,
+                            refreshToken
                         },
                         message: 'User information matched.'
                     });
