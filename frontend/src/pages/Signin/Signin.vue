@@ -1,30 +1,54 @@
 <template>
     <div class="hello">
         <h1>{{ msg }}</h1>
-        <form>
+        <form @submit.prevent="signin">
             <b-form-group
                 label="Enter your user id"
             >
-                <b-form-input type="text"></b-form-input>
+                <b-form-input v-model="uid" type="text"></b-form-input>
             </b-form-group>
             <b-form-group
                 label="Enter your password"
             >
-                <b-form-input type="password"></b-form-input>
+                <b-form-input v-model="password" type="password"></b-form-input>
             </b-form-group>
-            <b-button size="lg" variant="success">Signin</b-button>
+            <b-button size="lg" variant="success" type="submit">Signin</b-button>
         </form>
         <router-link :to="{ name:'Signup' }">Sigiup</router-link>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'Signin',
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                msg: 'Welcome to Your Vue.js App',
+                uid: '',
+                password: '',
             };
+        },
+        methods: {
+            signin () {
+                const uid = this.uid;
+                const password = this.password;
+
+                if (!uid || !password) {
+                    return false;
+                }
+
+                axios.post('http://localhost:3000/auth/signin', { uid, password })
+                    .then(res => {
+                        if (res.status === 200) {
+                            alert('로그인 성공');
+                        }
+                    })
+                    .catch(err => {
+                        alert('로그인 실패');
+                    })
+            }
         }
     };
 </script>
