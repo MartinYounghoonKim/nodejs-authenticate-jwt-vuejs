@@ -20,11 +20,19 @@
 * [x] Signin
 * [x] Signup
 * [x] Signout
-* [ ] JWT authenticate
+* [x] JWT authenticate
 * [ ] Store refresh token in redis
+* [ ] Read logic with permission
+* [ ] Create logic with permission
+* [ ] Delete logic with permission
+* [ ] Update logic with permission
 * ---------- **Frontend server** ----------
 * [ ] handling jwt token with vuex
-* [ ] handling Authenticate 
+* [ ] handling Authenticate
+- * [ ] Signup
+- * [ ] Signin
+- * [ ] Signout
+* [ ] management toast popup about server's response
 
 ## Getting started
 1. install module
