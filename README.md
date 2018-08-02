@@ -42,6 +42,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8;
 ```
 
+2. Start redis cli server on background
+```bash
+$ redis-server &
+```
 2. Install all backend dependencies
 ```bash
 $ cd backend && npm install
