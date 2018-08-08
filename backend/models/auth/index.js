@@ -36,6 +36,9 @@ exports.signin = (information) => {
                     resolve({
                         status: 200,
                         data: {
+                            uid,
+                            role,
+                            position,
                             accessToken,
                             refreshToken
                         },
