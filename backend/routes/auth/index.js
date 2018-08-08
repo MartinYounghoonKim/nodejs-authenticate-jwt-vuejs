@@ -5,6 +5,9 @@
 const express = require('express');
 const auth = express.Router();
 const controller = require('./controller');
+const authMiddleware = require('../../middleware/auth');
+
+// auth.use(authMiddleware);
 
 auth.get('/', controller.getUsers);
 auth.get('/me', controller.certifyUser);
