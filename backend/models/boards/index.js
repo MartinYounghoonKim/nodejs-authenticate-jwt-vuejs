@@ -7,7 +7,6 @@ exports.getBoard = (index) => {
         connection.query(sql, [index], (err, result, fields) => {
             if (err) {
                 reject({
-                    data: {},
                     message: 'Something wrong in server.',
                     status: 501,
                 });
@@ -23,7 +22,6 @@ exports.getBoard = (index) => {
                     reject({
                         status: 401,
                         message: 'Result is not existed.',
-                        data: {}
                     });
                 }
 
@@ -53,10 +51,12 @@ exports.getBoards = () => {
     });
 };
 
-exports.createBoard = () => {
-    const sql = 'INSERT INTO boards (user, upk, content) VALUES (?, ?, ?)';
+exports.createBoard = (payload) => {
+    const { title, uid, upk, content } = payload;
+    const sql = 'INSERT INTO boards (user, upk, title, content) VALUES (?, ?, ?, ?)';
+
     return new Promise((resolve, reject) => {
-        connection.query(sql,['Martin', 9, '테스트'], (err, result, fields) => {
+        connection.query(sql,[uid, upk, title, content], (err, result, fields) => {
             if (err) {
                 reject({
                     data: {},
@@ -67,7 +67,7 @@ exports.createBoard = () => {
                 resolve({
                     status: 200,
                     message: 'Success',
-                    data: result
+                    data: result[0]
                 });
             }
         })

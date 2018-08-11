@@ -6,7 +6,6 @@ exports.getBoard = (req, res, next) => {
     if (isNaN(indexToNumber)) {
         res.status(401)
             .json({
-                data: {},
                 message: 'This is not a valid request.'
             });
     }
@@ -34,8 +33,18 @@ exports.getBoards = (req, res, next) => {
 };
 
 exports.createBoard = (req, res, next) => {
-    const { uid, password } = req.body;
-    boardModels.createBoard()
+    const { title, content } = req.body;
+    const uid = 'Martin';
+    const upk = 9;
+    const isInvalidRequest = !content || content.length <= 0 || !title || title.length <= 0;
+
+    if (isInvalidRequest) {
+        res.status(401)
+            .json({
+                message: 'This is not a valid request.'
+            });
+    }
+    boardModels.createBoard({ uid, upk, title, content })
         .then(result => {
             res.json(result);
         })
