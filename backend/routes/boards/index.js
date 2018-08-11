@@ -7,10 +7,10 @@ const router = express.Router();
 const controller = require('./controller');
 const authMiddleware = require('../../middleware/auth');
 
-// auth.use(authMiddleware);
+router.use(authMiddleware);
 
-router.get('/', controller.getBoards);
 router.get('/:index', controller.getBoard);
+router.get('/', controller.getBoards);
 router.post('/', controller.createBoard);
 router.put('/:index', controller.updateBoard);
 router.delete('/:index', controller.deleteBoard);
