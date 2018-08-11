@@ -68,6 +68,16 @@ CREATE TABLE `users` (
   `password` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8;
+
+CREATE TABLE boards (
+    `index` INT(11) NOT NULL AUTO_INCREMENT,
+    `user` VARCHAR(50) NOT NULL,
+    `upk` INT(11) NOT NULL,
+    `content` MEDIUMTEXT NOT NULL,
+    `regdate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`index`)
+)
+COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;
 ```
 
 2. Start redis cli server on background
