@@ -70,14 +70,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8;
 
 CREATE TABLE boards (
-      `index` int(11) NOT NULL COMMENT 'Board item`s primary key',
+      `index` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Board item`s primary key',
       `user` varchar(50) NOT NULL COMMENT 'Creator',
       `upk` int(11) NOT NULL COMMENT 'Creator`s primary key',
       `title` varchar(50) NOT NULL COMMENT 'Board item`s title',
       `content` mediumtext NOT NULL COMMENT 'Board item`s content',
-      `regdate` datetime NOT NULL COMMENT 'Board item`s regdate',
-      `editdate` datetime NOT NULL COMMENT 'Board item`s edit date'
+      `regdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Board item`s regdate',
+      `editdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Board item`s edit date'
   PRIMARY KEY (`index`)
+  
 )
 COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;
 ```
