@@ -33,9 +33,7 @@ exports.getBoards = (req, res, next) => {
 };
 
 exports.createBoard = (req, res, next) => {
-    const { title, content } = req.body;
-    const uid = 'Martin';
-    const upk = 9;
+    const { uid, upk, title, content } = req.body;
     const isInvalidRequest = !content || content.length <= 0 || !title || title.length <= 0;
 
     if (isInvalidRequest) {
