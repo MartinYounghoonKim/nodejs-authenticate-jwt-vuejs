@@ -52,11 +52,12 @@ exports.getBoards = () => {
 };
 
 exports.createBoard = (payload) => {
+    const regdate = new Date;
     const { title, uid, upk, content } = payload;
-    const sql = 'INSERT INTO boards (user, upk, title, content) VALUES (?, ?, ?, ?)';
+    const sql = 'INSERT INTO boards (user, upk, title, content, regdate) VALUES (?, ?, ?, ?, ?)';
 
     return new Promise((resolve, reject) => {
-        connection.query(sql,[uid, upk, title, content], (err, result, fields) => {
+        connection.query(sql,[uid, upk, title, content, regdate], (err, result, fields) => {
             if (err) {
                 reject({
                     data: {},
@@ -64,10 +65,11 @@ exports.createBoard = (payload) => {
                     status: 501,
                 });
             } else {
+                const index = result.insertId;
                 resolve({
                     status: 200,
                     message: 'Success',
-                    data: result[0]
+                    data: { upk, index, uid, title, content, regdate }
                 });
             }
         })
