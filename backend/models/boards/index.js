@@ -3,37 +3,26 @@ const connection = database.connection();
 
 exports.getBoard = (payload) => {
     const { index, upk } = payload;
-    const sql = 'SELECT * FROM boards WHERE `index`=?';
     return new Promise((resolve, reject) => {
-        connection.query(sql, [index], (err, result, fields) => {
-            if (err) {
-                return reject({
-                    message: 'Something wrong in server.',
-                    status: 501,
-                });
-            }
-            const isExistResult = result.length > 0;
-            if (!isExistResult) {
-                // Result doesn't existed.
-                reject({
-                    status: 401,
-                    message: 'Result is not existed.',
-                });
-            }
-            if (result[0]['upk'] === upk) {
-                // User have permission
-                resolve({
-                    status: 200,
-                    message: 'Success',
-                    data: result
-                });
-            } else {
-                resolve({
-                    status: 401,
-                    message: 'The user is not authorized.',
-                });
-            }
-        })
+        selectBoardItem(index)
+            .then(result => {
+                if (result[0]['upk'] === upk) {
+                    // User have permission
+                    resolve({
+                        status: 200,
+                        message: 'Success',
+                        data: result
+                    });
+                } else {
+                    reject({
+                        status: 401,
+                        message: 'The user is not authorized.',
+                    });
+                }
+            })
+            .catch(err => {
+                reject(err);
+            });
     });
 };
 
