@@ -1,30 +1,37 @@
 const database = require('../index');
 const connection = database.connection();
 
-exports.getBoard = (index) => {
+exports.getBoard = (payload) => {
+    const { index, upk } = payload;
     const sql = 'SELECT * FROM boards WHERE `index`=?';
     return new Promise((resolve, reject) => {
         connection.query(sql, [index], (err, result, fields) => {
             if (err) {
-                reject({
+                return reject({
                     message: 'Something wrong in server.',
                     status: 501,
                 });
+            }
+            const isExistResult = result.length > 0;
+            if (!isExistResult) {
+                // Result doesn't existed.
+                reject({
+                    status: 401,
+                    message: 'Result is not existed.',
+                });
+            }
+            if (result[0]['upk'] === upk) {
+                // User have permission
+                resolve({
+                    status: 200,
+                    message: 'Success',
+                    data: result
+                });
             } else {
-                const isExistResult = result.length > 0;
-                if (isExistResult) {
-                    resolve({
-                        status: 200,
-                        message: 'Success',
-                        data: result
-                    });
-                } else {
-                    reject({
-                        status: 401,
-                        message: 'Result is not existed.',
-                    });
-                }
-
+                resolve({
+                    status: 401,
+                    message: 'The user is not authorized.',
+                });
             }
         })
     });
@@ -75,3 +82,56 @@ exports.createBoard = (payload) => {
         })
     });
 };
+
+exports.updateBoard = (payload) => {
+    const editdate = new Date;
+    const { index, title, content } = payload;
+    const sql = 'UPDATE boards SET title = ?, content = ?, editdate = ? WHERE `index` = ?';
+
+    return new Promise((resolve, reject) => {
+        connection.query(sql,[title, content, editdate, index], (err, result, fields) => {
+            if (err) {
+                reject({
+                    data: {},
+                    message: 'Something wrong in server',
+                    status: 501,
+                });
+            } else {
+                const index = result.insertId;
+                resolve({
+                    status: 200,
+                    message: 'Success',
+                    data: { title, content, editdate, index }
+                });
+            }
+        })
+    });
+};
+
+function selectBoardItem (index) {
+    const sql = 'SELECT * FROM boards WHERE `index`=?';
+    return new Promise((resolve, reject) => {
+        connection.query(sql, [index], (err, result, fields) => {
+            if (err) {
+                return reject({
+                    message: 'Something wrong in server.',
+                    status: 501,
+                });
+            }
+            const isExistResult = result.length > 0;
+            if (!isExistResult) {
+                // Result doesn't existed.
+                reject({
+                    status: 401,
+                    message: 'Result is not existed.',
+                });
+            } else {
+                resolve({
+                    status: 200,
+                    message: 'Success',
+                    data: result
+                });
+            }
+        })
+    });
+}

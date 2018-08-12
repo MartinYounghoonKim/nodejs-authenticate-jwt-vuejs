@@ -61,22 +61,23 @@ $ npm start
 
 ```sql
 CREATE TABLE `users` (
-  `index` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `position` varchar(50) NOT NULL,
-  `password` varchar(80) DEFAULT NULL,
+      `index` int(11) NOT NULL AUTO_INCREMENT,
+      `user` varchar(50) NOT NULL,
+      `role` varchar(50) NOT NULL,
+      `position` varchar(50) NOT NULL,
+      `password` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8;
 
 CREATE TABLE boards (
-    `index` INT(11) NOT NULL AUTO_INCREMENT,
-    `user` VARCHAR(50) NOT NULL,
-    `upk` INT(11) NOT NULL,
-    `title` varchar(50) NOT NULL,
-    `content` MEDIUMTEXT NOT NULL,
-    `regdate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`index`)
+      `index` int(11) NOT NULL COMMENT 'Board item`s primary key',
+      `user` varchar(50) NOT NULL COMMENT 'Creator',
+      `upk` int(11) NOT NULL COMMENT 'Creator`s primary key',
+      `title` varchar(50) NOT NULL COMMENT 'Board item`s title',
+      `content` mediumtext NOT NULL COMMENT 'Board item`s content',
+      `regdate` datetime NOT NULL COMMENT 'Board item`s regdate',
+      `editdate` datetime NOT NULL COMMENT 'Board item`s edit date'
+  PRIMARY KEY (`index`)
 )
 COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;
 ```
