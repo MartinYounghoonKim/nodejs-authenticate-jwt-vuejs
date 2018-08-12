@@ -22,15 +22,15 @@
 * [x] Signout
 * [x] JWT authenticate
 * [ ] Store refresh token in redis
-* [ ] Read logic with permission
-* [ ] Create logic with permission
-* [ ] Delete logic with permission
-* [ ] Update logic with permission
+* [x] Read logic with permission
+* [x] Create logic with permission
+* [x] Delete logic with permission
+* [x] Update logic with permission
 * ---------- **Frontend server** ----------
 * [ ] handling jwt token with vuex
 * [ ] handling Authenticate
-- * [ ] Signup
-- * [ ] Signin
+- * [x] Signup
+- * [x] Signin
 - * [ ] Signout
 * [ ] management toast popup about server's response
 
