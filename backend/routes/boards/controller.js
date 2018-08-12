@@ -2,6 +2,7 @@ const boardModels = require('../../models/boards/index');
 
 exports.getBoard = (req, res, next) => {
     const { index } = req.params;
+    const { upk } = req.body;
     const indexToNumber = Number(index);
     if (isNaN(indexToNumber)) {
         res.status(401)
@@ -9,7 +10,7 @@ exports.getBoard = (req, res, next) => {
                 message: 'This is not a valid request.'
             });
     }
-    boardModels.getBoard(index)
+    boardModels.getBoard({ index, upk })
         .then(result => {
             res.json(result);
         })
@@ -54,10 +55,25 @@ exports.createBoard = (req, res, next) => {
 };
 
 exports.updateBoard = (req, res, next) => {
-    /**
-     * @TODO
-     * update contents
-     */
+    const { index } = req.params;
+    const { title, content, upk } = req.body;
+    const isInvalidRequest = !content || content.length <= 0 || !title || title.length <= 0;
+    if (isInvalidRequest) {
+        // Validate required fields
+        res.status(401)
+            .json({
+                message: 'This is not a valid request.'
+            });
+    }
+    boardModels.updateBoard({ upk, index, title, content })
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
 };
 
 exports.deleteBoard = (req, res, next) => {

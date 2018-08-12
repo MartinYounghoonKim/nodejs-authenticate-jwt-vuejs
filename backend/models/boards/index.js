@@ -85,26 +85,41 @@ exports.createBoard = (payload) => {
 
 exports.updateBoard = (payload) => {
     const editdate = new Date;
-    const { index, title, content } = payload;
+    const { index, title, content, upk } = payload;
     const sql = 'UPDATE boards SET title = ?, content = ?, editdate = ? WHERE `index` = ?';
 
     return new Promise((resolve, reject) => {
-        connection.query(sql,[title, content, editdate, index], (err, result, fields) => {
-            if (err) {
-                reject({
-                    data: {},
-                    message: 'Something wrong in server',
-                    status: 501,
-                });
-            } else {
-                const index = result.insertId;
-                resolve({
-                    status: 200,
-                    message: 'Success',
-                    data: { title, content, editdate, index }
-                });
-            }
-        })
+        selectBoardItem(index)
+            .then(res => {
+                const isMatchedUser = res[0].upk === upk;
+                if (isMatchedUser) {
+                    connection.query(sql,[title, content, editdate, index], (err, result, fields) => {
+                        if (err) {
+                            return reject({
+                                data: {},
+                                message: 'Something wrong in server',
+                                status: 501,
+                            });
+                        }
+                        const index = result.insertId;
+                        resolve({
+                            status: 200,
+                            message: 'Success',
+                            data: { title, content, editdate, index }
+                        });
+                    })
+                } else {
+                    // User's permission isn't existed.
+                    reject({
+                        message: 'The user don`t have permission top edit.',
+                        status: 401,
+                    })
+                }
+            })
+            .catch(err => {
+                // Result's doesn't existed.
+                reject(err);
+            });
     });
 };
 
@@ -121,16 +136,12 @@ function selectBoardItem (index) {
             const isExistResult = result.length > 0;
             if (!isExistResult) {
                 // Result doesn't existed.
-                reject({
+                return reject({
                     status: 401,
                     message: 'Result is not existed.',
                 });
             } else {
-                resolve({
-                    status: 200,
-                    message: 'Success',
-                    data: result
-                });
+                return resolve(result);
             }
         })
     });
