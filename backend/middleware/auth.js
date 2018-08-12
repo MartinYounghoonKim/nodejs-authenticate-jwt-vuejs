@@ -18,10 +18,10 @@ module.exports = function (req, res, next) {
             next();
         })
         .catch(err => {
+            const status = 401;
+            const message = err.message;
             return res
-                .status(401)
-                .send({
-                    message: err.message
-                });
+                .status(status)
+                .send({ status, message });
         });
 };
