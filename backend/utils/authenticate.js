@@ -27,7 +27,7 @@ exports.certifyAccessToken = (token) => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, secretKey, (err, decoded) => {
             if (err) {
-                reject(false);
+                reject(err);
             } else {
                 resolve(decoded);
             }
