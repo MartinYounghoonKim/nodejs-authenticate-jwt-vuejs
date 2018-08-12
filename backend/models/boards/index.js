@@ -112,6 +112,43 @@ exports.updateBoard = (payload) => {
     });
 };
 
+exports.deleteBoard = (payload) => {
+    const { index, upk } = payload;
+    const sql = 'DELETE FROM boards WHERE `index`=?';
+
+    return new Promise((resolve, reject) => {
+        selectBoardItem(index)
+            .then(result => {
+                const isMatchedUser = result[0].upk === upk;
+                if (isMatchedUser) {
+                    connection.query(sql, [index], (err, result, fields) => {
+                        if (err) {
+                            return reject({
+                                data: {},
+                                message: 'Something wrong in server',
+                                status: 501,
+                            });
+                        }
+                        resolve({
+                            status: 200,
+                            message: 'Success',
+                            data: { index }
+                        });
+                    })
+                } else {
+                    // User's permission isn't existed.
+                    reject({
+                        message: 'The user don`t have permission to delete.',
+                        status: 401,
+                    })
+                }
+
+            })
+            .catch(err => reject(err));
+
+    });
+};
+
 function selectBoardItem (index) {
     const sql = 'SELECT * FROM boards WHERE `index`=?';
     return new Promise((resolve, reject) => {

@@ -95,8 +95,16 @@ exports.updateBoard = (req, res, next) => {
 };
 
 exports.deleteBoard = (req, res, next) => {
-    /**
-     * @TODO
-     * delete contents
-     */
+    const { index } = req.params;
+    const { upk } = req.body;
+
+    boardModels.deleteBoard({ upk, index })
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
 };
