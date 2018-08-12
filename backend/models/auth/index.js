@@ -29,8 +29,9 @@ exports.signin = (information) => {
                 const isMatchPassword = authenticateUtils.certifyPassword(password, result[0].password);
 
                 if (isMatchPassword) {
+                    const upk = result[0].index;
                     const { role, position } = result[0];
-                    const accessToken = authenticateUtils.generateAccessToken({ uid, role, position });
+                    const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
                     const refreshToken = authenticateUtils.generateRefreshToken({ uid, password });
 
                     resolve({

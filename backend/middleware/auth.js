@@ -13,10 +13,15 @@ module.exports = function (req, res, next) {
     }
     return authenticateUtils.certifyAccessToken(accessToken)
         .then(result => {
+            req.body.uid = result.uid;
+            req.body.upk = result.upk;
             next();
         })
         .catch(err => {
-            console.log(err);
-            return res.send('fail');
+            return res
+                .status(401)
+                .send({
+                    message: err.message
+                });
         });
 };

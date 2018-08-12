@@ -73,6 +73,7 @@ CREATE TABLE boards (
     `index` INT(11) NOT NULL AUTO_INCREMENT,
     `user` VARCHAR(50) NOT NULL,
     `upk` INT(11) NOT NULL,
+    `title` varchar(50) NOT NULL,
     `content` MEDIUMTEXT NOT NULL,
     `regdate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`index`)
