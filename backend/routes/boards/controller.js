@@ -39,14 +39,14 @@ exports.createBoard = (req, res, next) => {
     const isExistContent = content && content.length > 0;
 
     if (!isExistTitle) {
-        res.status(401)
+        return res.status(401)
             .json({
                 status: 401,
                 message: 'Title field is required.'
             });
     }
     if (!isExistContent) {
-        res.status(401)
+        return res.status(401)
             .json({
                 status: 401,
                 message: 'Content field is required.'
@@ -66,12 +66,21 @@ exports.createBoard = (req, res, next) => {
 exports.updateBoard = (req, res, next) => {
     const { index } = req.params;
     const { title, content, upk } = req.body;
-    const isInvalidRequest = !content || content.length <= 0 || !title || title.length <= 0;
-    if (isInvalidRequest) {
-        // Validate required fields
-        res.status(401)
+    const isExistTitle = title && title.length > 0;
+    const isExistContent = content && content.length > 0;
+
+    if (!isExistTitle) {
+        return res.status(401)
             .json({
-                message: 'This is not a valid request.'
+                status: 401,
+                message: 'Title field is required.'
+            });
+    }
+    if (!isExistContent) {
+        return res.status(401)
+            .json({
+                status: 401,
+                message: 'Content field is required.'
             });
     }
     boardModels.updateBoard({ upk, index, title, content })

@@ -100,7 +100,7 @@ exports.updateBoard = (payload) => {
                 } else {
                     // User's permission isn't existed.
                     reject({
-                        message: 'The user don`t have permission top edit.',
+                        message: 'The user don`t have permission to edit.',
                         status: 401,
                     })
                 }
