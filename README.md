@@ -57,6 +57,10 @@ $ npm start
 
 
 ### Backend set up
+1. 
+```bash
+$ cp ./backend/.env.sample ./backend/.env 
+```
 1. Setting database
 
 ```sql
