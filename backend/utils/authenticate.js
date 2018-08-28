@@ -15,7 +15,7 @@ exports.generateSalt = () => {
 };
 
 exports.generateAccessToken = (information) => {
-    return jwt.sign(information, secretKey, { expiresIn: '1m' });
+    return jwt.sign(information, secretKey, { expiresIn: '1d' });
 };
 
 exports.generateRefreshToken = (information) => {
