@@ -30,7 +30,7 @@ exports.signin = (information) => {
 
                 if (isMatchPassword) {
                     const upk = result[0].index;
-                    const { role, position } = result[0];
+                    const { role, position, password } = result[0];
                     const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
                     const refreshToken = authenticateUtils.generateRefreshToken({ uid, password });
 
@@ -156,11 +156,10 @@ exports.reissuanceAccessToken = (refreshToken) => {
                             status: 501,
                         });
                     } else {
-                        authenticateUtils.decodedRefreshToken(refreshToken, result[0].password)
+                        const { uid, password, role, position } = result[0];
+                        const upk = result[0].index;
+                        authenticateUtils.certifyRefreshToken(refreshToken, password)
                             .then(res => {
-                                const { uid } = result[0];
-                                const upk = result[0].index;
-                                const { role, position } = result[0];
                                 const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
                                 resolve({
                                     status: 200,
@@ -168,6 +167,12 @@ exports.reissuanceAccessToken = (refreshToken) => {
                                     data: {
                                         accessToken
                                     }
+                                });
+                            })
+                            .catch(err => {
+                                reject({
+                                    status: 400,
+                                    message: 'It`s invalid token.'
                                 });
                             });
                     }

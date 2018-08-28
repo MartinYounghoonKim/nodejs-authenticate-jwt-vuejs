@@ -20,6 +20,7 @@ exports.generateAccessToken = (information) => {
 
 exports.generateRefreshToken = (information) => {
     const { uid, password } = information;
+    console.log(secretKey + password);
     return jwt.sign({ uid }, secretKey + password, { expiresIn: '7d' });
 };
 
@@ -35,11 +36,14 @@ exports.certifyAccessToken = (token) => {
     });
 };
 
-exports.decodedRefreshToken = (token, password) => {
+exports.decodedRefreshToken = (token) => {
     return new Promise((resolve, reject) => {
-        const decoded = jwt.decode(token);
-        console.log(decoded);
-        resolve(decoded);
+        try {
+            const decoded = jwt.decode(token);
+            resolve(decoded);
+        } catch (e) {
+            reject(e);
+        }
     });
 };
 
