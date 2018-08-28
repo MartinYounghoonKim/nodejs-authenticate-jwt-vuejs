@@ -76,3 +76,16 @@ exports.certifyUser = (req, res, next) => {
                 .json(err);
         });
 };
+
+exports.reissuanceAccessToken = (req, res, next) => {
+    const refreshToken = req.headers['x-refresh-token'];
+    authModels.reissuanceAccessToken(refreshToken)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};

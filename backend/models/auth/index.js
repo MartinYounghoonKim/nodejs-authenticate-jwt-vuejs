@@ -142,3 +142,36 @@ exports.certifyUser = (token) => {
             });
         });
 };
+
+exports.reissuanceAccessToken = (refreshToken) => {
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT * FROM users WHERE user = ?`;
+        authenticateUtils.decodedRefreshToken(refreshToken)
+            .then(res => {
+                connection.query(sql, [res.uid], (err, result, fields) => {
+                    if (err) {
+                        reject({
+                            data: {},
+                            message: 'Something wrong in server',
+                            status: 501,
+                        });
+                    } else {
+                        authenticateUtils.decodedRefreshToken(refreshToken, result[0].password)
+                            .then(res => {
+                                const { uid } = result[0];
+                                const upk = result[0].index;
+                                const { role, position } = result[0];
+                                const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
+                                resolve({
+                                    status: 200,
+                                    message: 'Success',
+                                    data: {
+                                        accessToken
+                                    }
+                                });
+                            });
+                    }
+                });
+            });
+    });
+};

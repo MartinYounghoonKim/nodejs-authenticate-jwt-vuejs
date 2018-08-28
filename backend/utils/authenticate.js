@@ -34,3 +34,23 @@ exports.certifyAccessToken = (token) => {
         })
     });
 };
+
+exports.decodedRefreshToken = (token, password) => {
+    return new Promise((resolve, reject) => {
+        const decoded = jwt.decode(token);
+        console.log(decoded);
+        resolve(decoded);
+    });
+};
+
+exports.certifyRefreshToken = (token, password) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, secretKey + password, (err, decoded) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(decoded);
+            }
+        })
+    });
+};
