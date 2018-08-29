@@ -43,7 +43,10 @@
                     .then(res => {
                         if (res.status === 200) {
                             alert('로그인 성공');
+                            document.cookie = `accessToken=${res.data.data.accessToken}`; //header에 실어서 요청을 보낸다. SSL 을 붙이기도 함.
+                            this.$router.push({ name : 'Home'})
                         }
+
                     })
                     .catch(err => {
                         alert('로그인 실패');

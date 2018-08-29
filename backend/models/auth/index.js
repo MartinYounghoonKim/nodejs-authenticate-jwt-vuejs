@@ -4,7 +4,7 @@
 const database = require('../index');
 const connection = database.connection();
 const authenticateUtils = require('../../utils/authenticate');
-const redisUtils = require('../../utils/redis');
+//const redisUtils = require('../../utils/redis');
 
 exports.signin = (information) => {
     const { uid, password } = information;
