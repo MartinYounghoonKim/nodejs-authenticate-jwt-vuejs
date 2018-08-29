@@ -38,7 +38,6 @@
                 if (!uid || !password) {
                     return false;
                 }
-
                 axios.post('http://localhost:3000/auth/signin', { uid, password })
                     .then(res => {
                         if (res.status === 200) {
