@@ -4,7 +4,7 @@
 const database = require('../index');
 const connection = database.connection();
 const authenticateUtils = require('../../utils/authenticate');
-const redisUtils = require('../../utils/redis');
+// const redisUtils = require('../../utils/redis');
 
 exports.signin = (information) => {
     const { uid, password } = information;
@@ -12,6 +12,7 @@ exports.signin = (information) => {
 
     return new Promise((resolve, reject) => {
         connection.query(sql, [uid], (err, result, fields) => {
+            console.log(err);
             if (err) {
                 reject({
                     data: {},
@@ -19,7 +20,7 @@ exports.signin = (information) => {
                     status: 501,
                 });
             }
-            if (result.length === 0) {
+            if (result === undefined) {
                 reject({
                     status: 401,
                     data: {},

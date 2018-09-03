@@ -43,6 +43,8 @@
                     .then(res => {
                         if (res.status === 200) {
                             alert('로그인 성공');
+                            document.cookie = `accessToken=${res.data.data.accessToken}`;
+                            this.$router.push({ name: 'Home' });
                         }
                     })
                     .catch(err => {
