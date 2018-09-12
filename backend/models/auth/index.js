@@ -12,7 +12,6 @@ exports.signin = (information) => {
 
     return new Promise((resolve, reject) => {
         connection.query(sql, [uid], (err, result, fields) => {
-            console.log(err);
             if (err) {
                 reject({
                     data: {},
@@ -157,8 +156,7 @@ exports.reissuanceAccessToken = (refreshToken) => {
                             status: 501,
                         });
                     } else {
-                        const { uid, password, role, position } = result[0];
-                        const upk = result[0].index;
+                        const { user: uid, index: upk, password, role, position } = result[0];
                         authenticateUtils.certifyRefreshToken(refreshToken, password)
                             .then(res => {
                                 const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });

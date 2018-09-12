@@ -1,11 +1,5 @@
 const authModels = require('../../models/auth/index');
 
-exports.getUsers = (req, res, next) => {
-    authModels.getUsers(function(error, results) {
-        res.json(results);
-    });
-};
-
 exports.signin = (req, res, next) => {
     const { uid, password } = req.body;
     const isInvalidRequest = !uid || !password;
