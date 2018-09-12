@@ -1,0 +1,352 @@
+{
+	"id": "73e9e792-d251-40a4-b52d-ac97516632e0",
+	"name": "authenticate",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": null,
+	"order": [
+		"3ca9427a-2956-481b-bfee-7025cecc859b",
+		"158c721b-9625-4a8b-ab67-1a67a168413d",
+		"eb62802d-010f-48e8-b0f5-f1eb9dbb080f",
+		"53ca013d-76d5-4337-b3f9-4b3e7c807147",
+		"f191d15f-d29a-42ca-bc7c-6793cbc45e26",
+		"2fcff576-11ce-4d29-90db-ec675c89b527",
+		"fc806976-a88c-4174-b1ac-c473094249c4",
+		"05c98c01-5694-42c0-8ec3-e232f893fa9d",
+		"414d01eb-adab-463e-bae5-6464df376658"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "05c98c01-5694-42c0-8ec3-e232f893fa9d",
+			"name": "게시판 리스트 수정 API",
+			"url": "localhost:3000/board/1",
+			"description": "",
+			"data": [
+				{
+					"key": "title",
+					"value": "제목 수정본",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "content",
+					"value": "컨텐츠 수정본",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				},
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc3MTAsImV4cCI6MTUzNjczNzc3MH0.3a6A1oml0yqr8S52DzKrKTOvPal4z6rVhuMmwdPmFC8",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc3MTAsImV4cCI6MTUzNjczNzc3MH0.3a6A1oml0yqr8S52DzKrKTOvPal4z6rVhuMmwdPmFC8\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "158c721b-9625-4a8b-ab67-1a67a168413d",
+			"name": "AccessToken 재발급 API",
+			"url": "localhost:3000/auth/reissuance",
+			"description": "",
+			"data": [],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				},
+				{
+					"key": "x-refresh-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJpYXQiOjE1MzY3Mjk0NTMsImV4cCI6MTUzNzMzNDI1M30.NxNA-8Nxw-vryqv7mCIf8ETQWDnrQiHHAi6XxjUaCTg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-refresh-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJpYXQiOjE1MzY3Mjk0NTMsImV4cCI6MTUzNzMzNDI1M30.NxNA-8Nxw-vryqv7mCIf8ETQWDnrQiHHAi6XxjUaCTg\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "2fcff576-11ce-4d29-90db-ec675c89b527",
+			"name": "게시판 리스트 상세 조회 API",
+			"url": "localhost:3000/board/1",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3MzA5MTksImV4cCI6MTUzNjczMDk3OX0.G79giANUr_o0QJpoPI8285OFBQS_ixJm8JQ4LkXanfA",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3MzA5MTksImV4cCI6MTUzNjczMDk3OX0.G79giANUr_o0QJpoPI8285OFBQS_ixJm8JQ4LkXanfA\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3ca9427a-2956-481b-bfee-7025cecc859b",
+			"name": "본인 확인 API",
+			"url": "localhost:3000/auth/me",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mjk1ODIsImV4cCI6MTUzNjcyOTY0Mn0.d7InQyO48aCHmUppbpDe5-w9rxGgDCuOPQjZHRDBjak",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mjk1ODIsImV4cCI6MTUzNjcyOTY0Mn0.d7InQyO48aCHmUppbpDe5-w9rxGgDCuOPQjZHRDBjak\nContent-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "414d01eb-adab-463e-bae5-6464df376658",
+			"name": "게시판 리스트 삭제 API",
+			"url": "localhost:3000/board/1",
+			"description": "",
+			"data": [
+				{
+					"key": "title",
+					"value": "제목 수정본",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "content",
+					"value": "컨텐츠 수정본",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				},
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc3MTAsImV4cCI6MTUzNjczNzc3MH0.3a6A1oml0yqr8S52DzKrKTOvPal4z6rVhuMmwdPmFC8",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc3MTAsImV4cCI6MTUzNjczNzc3MH0.3a6A1oml0yqr8S52DzKrKTOvPal4z6rVhuMmwdPmFC8\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "53ca013d-76d5-4337-b3f9-4b3e7c807147",
+			"name": "회원가입 API",
+			"url": "localhost:3000/auth/signup",
+			"description": "",
+			"data": [
+				{
+					"key": "uid",
+					"value": "Martin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "1234",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "role",
+					"value": "Front-end",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "position",
+					"value": "member",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "eb62802d-010f-48e8-b0f5-f1eb9dbb080f",
+			"name": "로그인 API",
+			"url": "localhost:3000/auth/signin",
+			"description": "",
+			"data": [
+				{
+					"key": "uid",
+					"value": "Martin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "1234",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "x-refresh-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJpYXQiOjE1MzU0MzQzMjEsImV4cCI6MTUzNjAzOTEyMX0.RGOPRiGJxvTMRDhYso1jpKCMWH3BiVT2LvPyH0vi6Jk",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "//x-refresh-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJpYXQiOjE1MzU0MzQzMjEsImV4cCI6MTUzNjAzOTEyMX0.RGOPRiGJxvTMRDhYso1jpKCMWH3BiVT2LvPyH0vi6Jk\nContent-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f191d15f-d29a-42ca-bc7c-6793cbc45e26",
+			"name": "게시판 리스트 조회 API",
+			"url": "localhost:3000/board",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc1ODgsImV4cCI6MTUzNjczNzY0OH0.5qDRJ_AdJx67kAWdFXL7utbbcw1kdbtX1rqJ4I91qTw",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc1ODgsImV4cCI6MTUzNjczNzY0OH0.5qDRJ_AdJx67kAWdFXL7utbbcw1kdbtX1rqJ4I91qTw\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "fc806976-a88c-4174-b1ac-c473094249c4",
+			"name": "게시판 리스트 생성 API",
+			"url": "localhost:3000/board",
+			"description": "",
+			"data": [
+				{
+					"key": "title",
+					"value": "게시글 제목",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "content",
+					"value": "게시글 컨텐츠 내용",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "x-access-token",
+					"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc1NTUsImV4cCI6MTUzNjczNzYxNX0.LrEG9rGmKMBlJuPxt8ggyU1igt_QF_Xlm6sIxC9gaa8",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNYXJ0aW4iLCJ1cGsiOjksInJvbGUiOiJGcm9udC1lbmQgRGV2ZWxvcGVyIiwicG9zaXRpb24iOiJtZW1iZXIiLCJpYXQiOjE1MzY3Mzc1NTUsImV4cCI6MTUzNjczNzYxNX0.LrEG9rGmKMBlJuPxt8ggyU1igt_QF_Xlm6sIxC9gaa8\nContent-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		}
+	]
+}

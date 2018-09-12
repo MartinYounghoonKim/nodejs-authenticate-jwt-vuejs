@@ -1,11 +1,5 @@
 const authModels = require('../../models/auth/index');
 
-exports.getUsers = (req, res, next) => {
-    authModels.getUsers(function(error, results) {
-        res.json(results);
-    });
-};
-
 exports.signin = (req, res, next) => {
     const { uid, password } = req.body;
     const isInvalidRequest = !uid || !password;
@@ -67,6 +61,19 @@ exports.signout = (req, res, next) => {
 exports.certifyUser = (req, res, next) => {
     const token = req.headers['x-access-token'];
     authModels.certifyUser(token)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => {
+            const { status } = err;
+            res.status(status)
+                .json(err);
+        });
+};
+
+exports.reissuanceAccessToken = (req, res, next) => {
+    const refreshToken = req.headers['x-refresh-token'];
+    authModels.reissuanceAccessToken(refreshToken)
         .then(result => {
             res.json(result);
         })

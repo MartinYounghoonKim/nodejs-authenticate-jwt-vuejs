@@ -57,6 +57,10 @@ $ npm start
 
 
 ### Backend set up
+1. 
+```bash
+$ cp ./backend/.env.sample ./backend/.env 
+```
 1. Setting database
 
 ```sql
@@ -76,7 +80,7 @@ CREATE TABLE boards (
       `title` varchar(50) NOT NULL COMMENT 'Board item`s title',
       `content` mediumtext NOT NULL COMMENT 'Board item`s content',
       `regdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Board item`s regdate',
-      `editdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Board item`s edit date'
+      `editdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Board item`s edit date',
   PRIMARY KEY (`index`)
   
 )

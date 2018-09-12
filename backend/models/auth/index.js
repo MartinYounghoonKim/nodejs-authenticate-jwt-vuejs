@@ -4,7 +4,7 @@
 const database = require('../index');
 const connection = database.connection();
 const authenticateUtils = require('../../utils/authenticate');
-const redisUtils = require('../../utils/redis');
+// const redisUtils = require('../../utils/redis');
 
 exports.signin = (information) => {
     const { uid, password } = information;
@@ -19,7 +19,7 @@ exports.signin = (information) => {
                     status: 501,
                 });
             }
-            if (result.length === 0) {
+            if (result === undefined) {
                 reject({
                     status: 401,
                     data: {},
@@ -30,7 +30,7 @@ exports.signin = (information) => {
 
                 if (isMatchPassword) {
                     const upk = result[0].index;
-                    const { role, position } = result[0];
+                    const { role, position, password } = result[0];
                     const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
                     const refreshToken = authenticateUtils.generateRefreshToken({ uid, password });
 
@@ -141,4 +141,41 @@ exports.certifyUser = (token) => {
                 status: 401,
             });
         });
+};
+
+exports.reissuanceAccessToken = (refreshToken) => {
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT * FROM users WHERE user = ?`;
+        authenticateUtils.decodedRefreshToken(refreshToken)
+            .then(res => {
+                connection.query(sql, [res.uid], (err, result, fields) => {
+                    if (err) {
+                        reject({
+                            data: {},
+                            message: 'Something wrong in server',
+                            status: 501,
+                        });
+                    } else {
+                        const { user: uid, index: upk, password, role, position } = result[0];
+                        authenticateUtils.certifyRefreshToken(refreshToken, password)
+                            .then(res => {
+                                const accessToken = authenticateUtils.generateAccessToken({ uid, upk, role, position });
+                                resolve({
+                                    status: 200,
+                                    message: 'Success',
+                                    data: {
+                                        accessToken
+                                    }
+                                });
+                            })
+                            .catch(err => {
+                                reject({
+                                    status: 400,
+                                    message: 'It`s invalid token.'
+                                });
+                            });
+                    }
+                });
+            });
+    });
 };
