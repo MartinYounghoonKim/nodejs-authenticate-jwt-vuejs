@@ -2,14 +2,10 @@
     <div class="hello">
         <h1>{{ msg }}</h1>
         <form @submit.prevent="signin">
-            <b-form-group
-                label="Enter your user id"
-            >
+            <b-form-group label="Enter your user id">
                 <b-form-input v-model="uid" type="text"></b-form-input>
             </b-form-group>
-            <b-form-group
-                label="Enter your password"
-            >
+            <b-form-group label="Enter your password">
                 <b-form-input v-model="password" type="password"></b-form-input>
             </b-form-group>
             <b-button size="lg" variant="success" type="submit">Signin</b-button>
@@ -44,6 +40,8 @@
                         if (res.status === 200) {
                             alert('로그인 성공');
                             document.cookie = `accessToken=${res.data.data.accessToken}`;
+                            document.cookie = `refreshToken=${res.data.data.refreshToken}`;
+                            axios.defaults.headers.common['x-access-token'] = res.data.data.accessToken;
                             this.$router.push({ name: 'Home' });
                         }
                     })

@@ -1,28 +1,20 @@
 <template>
-    <div class="hello">
+    <div>
         <h1>Signup Form</h1>
         <form @submit.prevent="signup">
             <b-form-group label="Enter your user id">
-                <b-form-input type="text"
-                              v-model="uid"></b-form-input>
+                <b-form-input type="text" v-model="uid"></b-form-input>
             </b-form-group>
             <b-form-group label="Enter your password">
-                <b-form-input type="password"
-                              v-model="password"></b-form-input>
+                <b-form-input type="password" v-model="password"></b-form-input>
             </b-form-group>
             <b-form-group label="Enter your position">
-                <b-select v-model="position"
-                          :options="positionOptions"></b-select>
+                <b-select v-model="position" :options="positionOptions"></b-select>
             </b-form-group>
             <b-form-group label="Enter your role">
-                <b-select v-model="role"
-                          :options="roleOptions"></b-select>
+                <b-select v-model="role" :options="roleOptions"></b-select>
             </b-form-group>
-            <b-button size="lg"
-                      variant="success"
-                      type="submit">
-                Signup
-            </b-button>
+            <b-button size="lg" variant="success" type="submit">Signup</b-button>
         </form>
     </div>
 </template>
