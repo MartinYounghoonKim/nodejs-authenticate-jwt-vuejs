@@ -22,8 +22,16 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: 'Home',
+        created () {
+            axios.get('http://localhost:3000/board')
+            .then(res => {
+                console.log(res)
+            })
+        },
         data () {
             return {
                 items: [
@@ -51,7 +59,8 @@
                         regDate: '2017-01-31',
                         writer: '홍길동',
                     }
-                ]
+                ],
+                cookieData : ''
             }
         }
     }

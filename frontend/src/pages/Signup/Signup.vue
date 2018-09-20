@@ -64,6 +64,9 @@
                     .then(res => {
                         if (res.status === 200) {
                             // 성공적으로 회원가입이 되었을 경우
+                            document.cookie = `accessToken=${res.data.accessToken}`;
+                            axios.defaults.headers.common['Auth-Token'] = 'foo bar';
+                            axios.defaults.headers.common['x-access-token'] = res.data.data.accessToken;
                             this.$router.push({ name: 'Signin' });
                         }
                     });

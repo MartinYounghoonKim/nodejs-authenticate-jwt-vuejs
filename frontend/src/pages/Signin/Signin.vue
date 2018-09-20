@@ -43,6 +43,8 @@
                         if (res.status === 200) {
                             alert('로그인 성공');
                             document.cookie = `accessToken=${res.data.data.accessToken}`;
+                            //axios.defaults.headers.common['Auth-Token'] = 'foo bar';
+                            axios.defaults.headers.common['x-access-token'] = res.data.data.accessToken;
                             this.$router.push({ name: 'Home' });
                         }
                     })
